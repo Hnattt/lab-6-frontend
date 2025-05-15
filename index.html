@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <title>Лабораторна робота №6</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Система управління виробництвом</h1>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#equipment">Обладнання</a></li>
+    <li><a data-toggle="tab" href="#specification">Специфікація виробу</a></li>
+    <li><a data-toggle="tab" href="#material">Матеріал</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="equipment" class="tab-pane fade in active">
+      <h3>Обладнання</h3>
+    </div>
+
+    <div id="specification" class="tab-pane fade">
+      <h3>Специфікація виробу</h3>
+    </div>
+
+    <div id="material" class="tab-pane fade">
+      <h3>Матеріал</h3>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="equipmentModal" tabindex="-1" role="dialog" aria-labelledby="equipmentModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="equipmentModalLabel">Додати/Редагувати обладнання</h4>
+      </div>
+      <form id="equipmentForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="equipmentNameInput">Назва</label>
+            <select class="form-control" id="equipmentNameInput" required>
+              <option>Токарний верстат</option>
+              <option>Фрезерний верстат</option>
+              <option>Пробивний прес</option>
+            </select>            
+          </div>
+          <div class="form-group">
+            <label for="equipmentManufacturerInput">Виробник</label>
+            <select class="form-control" id="equipmentManufacturerInput" required>
+            <option>Металургійний завод</option>
+            <option>Машинобудівний завод</option>
+            <option>Пресове виробництво</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="equipmentInventoryNumberInput">Інвентарний номер</label>
+            <select class="form-control" id="equipmentInventoryNumberInput" required>
+              <option>T-12345</option>
+              <option>F-23456</option>
+              <option>P-34567</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="equipmentStartDateInput">Початок експлуатації</label>
+            <input type="text" class="form-control" id="equipmentStartDateInput" required>
+          </div>
+          <div class="form-group">
+            <label for="equipmentLifespanInput">Термін експлуатації</label>
+            <input type="text" class="form-control" id="equipmentLifespanInput" required>
+          </div>
+          <input type="hidden" id="equipmentIdInput" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeEquipmentModal" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+          <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="specificationModal" tabindex="-1" role="dialog" aria-labelledby="specificationModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="specificationModalLabel">Додати/Редагувати специфікацію</h4>
+      </div>
+      <form id="specificationForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="specificationQuantityInput">Кількість</label>
+            <input type="number" class="form-control" id="specificationQuantityInput" required>
+          </div>
+          <div class="form-group">
+            <label for="specificationNameInput">Назва</label>
+            <input type="text" class="form-control" id="specificationNameInput" required>
+          </div>
+          <div class="form-group">
+            <label for="specificationProductionTimeInput">Тривалість виробництва</label>
+            <input type="text" class="form-control" id="specificationProductionTimeInput" required>
+          </div>
+          <input type="hidden" id="specificationIdInput" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeSpecificationModal" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+          <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="materialModal" tabindex="-1" role="dialog" aria-labelledby="materialModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="materialModalLabel">Додати/Редагувати матеріал</h4>
+      </div>
+      <form id="materialForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="materialNameInput">Назва</label>
+            <input type="text" class="form-control" id="materialNameInput" required>
+          </div>
+          <div class="form-group">
+            <label for="materialTypeInput">Тип</label>
+            <select class="form-control" id="materialTypeInput" required>
+              <option>Метал</option>
+              <option>Метал	</option>
+              <option>Полімер</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="materialPricePerUnitInput">Ціна за одиницю</label>
+            <input type="text" class="form-control" id="materialPricePerUnitInput" required>
+          </div>
+          <div class="form-group">
+            <label for="materialUnitOfMeasureInput">Одиниця вимірювання</label>
+            <input type="text" class="form-control" id="materialUnitOfMeasureInput" required>
+          </div>
+          <div class="form-group">
+            <label for="materialAlternativeInput">Альтернатива</label>
+            <input type="text" class="form-control" id="materialAlternativeInput">
+          </div>
+          <input type="hidden" id="materialIdInput" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeMaterialModal" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+          <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="./main.js"></script>
+</body>
+</html>
